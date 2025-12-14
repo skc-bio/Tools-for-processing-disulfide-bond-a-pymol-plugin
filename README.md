@@ -60,7 +60,7 @@ For every **Red** bond:
 ```pymol
 ss_import  protein, bonds.csv      # visual check
 ss_check_dist protein, bonds.csv   # should be Green/Yellow
-ss_save_pdb protein, bonds.csv, activate_final.pdb
+ss_save_pdb protein, bonds.csv, protein_ssbond.pdb
 ```
 ---
 ## ⚠️ FAQ
