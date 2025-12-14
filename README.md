@@ -51,26 +51,26 @@ It addresses three common pain points:
 
 Use this workflow when you have a perfect template (e.g., `apo`) and a broken model (e.g., `activate` with missing loops).
 
-### Step 1: Define the Truth (CSV)
+## Step 1: Define the Truth (CSV)
 Extract the correct topology from the reference structure.
 ```pymol
 load apo.pdb
 ss_export apo, bonds.csv
 Action: Open bonds.csv in a text editor. Add any missing bonds manually based on UniProt data. Save it.
 
-### Step 2: Diagnose the Model
+## Step 2: Diagnose the Model
 Load the broken model and check for "Red" flags.
 Input Example:ss_check_dist protein, bonds.csv
 Output Example: A:60 - B:70 | 18.08 Å | BROKEN (Red) -> Needs Repair!
 
-### Step 3: Surgical Repair (Snap & Sculpt)
+## Step 3: Surgical Repair (Snap & Sculpt)
 For every Broken (Red) bond, perform the following:
 1.Snap (Align): Instantly move the loop to the core.
   # Usage: ss_snap [Anchor Atom], [Moving Atom], [Moving Scope/Loop]
   ss_snap /protein//A/60/SG, /protein//B/70/SG, /protein//B/60-80
 2.Heal (Sculpt): Fix the backbone breakage caused by the snap.
 
-### Step 4: Finalize and Export
+## Step 4: Finalize and Export
 Apply the topology visually and save the simulation-ready file.
 Example:
 # 1. Apply topology (Visual check)
@@ -80,7 +80,7 @@ ss_check_dist protein, bonds.csv
 # 3. Save with SSBOND headers
 ss_save_pdb protein, bonds.csv, activate_final.pdb
 
-⚠️ FAQ
+##⚠️ FAQ
 Q: Why are some bonds Pink/Magenta? A: This indicates the distance is > 3.0Å.
 3.0 - 4.5Å (Yellow status): Acceptable. Standard Energy Minimization (EM) in GROMACS/Amber will fix this automatically.
 > 5.0Å (Red status): Dangerous. The forcefield might crash. Use ss_snap to fix these.
